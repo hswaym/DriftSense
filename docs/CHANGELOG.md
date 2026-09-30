@@ -2,6 +2,17 @@
 
 All notable changes across project phases are logged here.
 
+## [Phase D2] - FOCUS Pricing & Accounting Model
+- Implemented `src/driftsense/sim/pricing.py`:
+  - Standardized multi-provider unit pricing in INR across all 6 services.
+  - Applied EDP contracted discounts (~8%) and Commitment discounts (~30%).
+  - Enforced financial invariant: $ListCost \ge ContractedCost \ge EffectiveCost$.
+  - Introduced legitimate negative line items for promotional credits and SLA refunds (`ChargeCategory="Credit"` / `"Refund"`, `ChargeClass="Correction"`).
+  - Implemented monthly partitioned Parquet exporter (`save_partitioned_billed_parquet`).
+  - Added mid-year price reduction event to discrete events log.
+- Implemented tests in `tests/test_d2_pricing.py` (cost identities, credit row flags, schema completeness, and partitioned parquet reads).
+- Updated `notebooks/colab/01_generate_data.ipynb` to execute and verify D1 + D2.
+
 ## [Phase D1] - World & Infrastructure Simulation
 - Implemented `src/driftsense/sim/world.py`:
   - Multi-seasonality (diurnal 24h, weekly 168h, annual trend).
