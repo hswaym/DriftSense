@@ -8,3 +8,5 @@ This document tracks all concrete tasks executed by team members across project 
 | 2024-10-01 | Member 1 | P0 | Dataset card and cleaning specification documentation review | Lead |
 | 2024-10-01 | Member 2 | P0 | Verified clean local environment setup and Makefile targets | Lead |
 | 2024-10-01 | Member 3 | P0 | Repository structure and presentation assets folder initialization | Lead |
+| 2024-10-02 | Lead | D1 | Implemented world.py and infra.py with vectorized autoscaler and storage | Team |
+| 2024-10-02 | Member 2 | D1 | Executed test_d1_sim.py verifying monotonicity and reproducibility | Lead |
