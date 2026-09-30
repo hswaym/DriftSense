@@ -1,5 +1,6 @@
 """Simulation modules: world, infra, pricing, faults, dirt, and realism."""
 
+from driftsense.sim.faults import inject_faults_and_decoys
 from driftsense.sim.infra import generate_infra_telemetry
 from driftsense.sim.pricing import (
     apply_pricing_model,
@@ -12,4 +13,5 @@ __all__ = [
     "generate_infra_telemetry",
     "apply_pricing_model",
     "save_partitioned_billed_parquet",
+    "inject_faults_and_decoys",
 ]

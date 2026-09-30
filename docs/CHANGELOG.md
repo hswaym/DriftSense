@@ -2,6 +2,17 @@
 
 All notable changes across project phases are logged here.
 
+## [Phase D3] - Fault Injection & Ground Truth
+- Implemented `src/driftsense/sim/faults.py`:
+  - Injected 6 distinct root-cause faults at the physical telemetry layer: `deployment_regression`, `autoscaling_runaway`, `traffic_surge`, `storage_leak`, `instance_upsize`, and `egress_spike`.
+  - Enforced strict held-out invariant: `egress_spike` appears solely during test split periods (months 11–12).
+  - Implemented dynamic perturbation profiles: `step`, `ramp`, and `decay`.
+  - Added benign decoys (`is_decoy=True`) for sales, month-end batches, and holiday dips.
+  - Built confounded scenario: CI/CD deployment and traffic surge co-occurring on same date with true root cause = `traffic_surge`.
+  - Generated canonical `ground_truth.parquet`.
+- Implemented tests in `tests/test_d3_faults.py` verifying held-out fault absence in train/calibration, $\ge 2.5\sigma$ cost deviations, and decoy labels.
+- Integrated D3 into `notebooks/colab/01_generate_data.ipynb`.
+
 ## [Phase D2] - FOCUS Pricing & Accounting Model
 - Implemented `src/driftsense/sim/pricing.py`:
   - Standardized multi-provider unit pricing in INR across all 6 services.
