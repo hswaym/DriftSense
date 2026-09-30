@@ -1,0 +1,33 @@
+dirt_rates:
+  missing_hours:
+    min_rate: 0.01
+    max_rate: 0.03
+  duplicates:
+    rate: 0.005
+  late_restated_bills:
+    rate: 0.02
+    delay_days_max: 3
+  timezone_shift:
+    provider: "azure_like"
+    offset_hours: 5.5  # e.g., IST vs UTC
+  unit_mixing:
+    services: ["object_storage", "cdn_egress"]
+    rate: 0.02
+    units: ["GB", "GiB", "bytes"]
+  null_resource_id:
+    rate: 0.01
+  sensor_glitches:
+    metric: "x_cpu_pct"
+    rate: 0.005
+    value_range: [150.0, 1000.0]  # physically impossible >100%
+  column_rename:
+    provider: "azure_like"
+    source_col: "BilledCost"
+    renamed_col: "CostInBillingCurrency"
+    effective_from_month: 6
+  tag_noise:
+    rate: 0.05
+    modes: ["corrupt_json", "missing_env_tag"]
+  currency_mix:
+    rate: 0.01
+    currencies: ["USD", "EUR"]

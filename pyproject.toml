@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "driftsense"
+version = "0.1.0"
+description = "Cloud Cost Anomaly Detection, Forecasting, and Causal Attribution Engine"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "DriftSense Team" }
+]
+dependencies = [
+    "numpy",
+    "pandas",
+    "polars",
+    "duckdb",
+    "pyarrow",
+    "scikit-learn",
+    "lightgbm",
+    "statsmodels",
+    "ruptures",
+    "scipy",
+    "matplotlib",
+    "plotly",
+    "pandera",
+    "pyyaml"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff"
+]
+app = [
+    "streamlit"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    ".ipynb_checkpoints"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

@@ -1,0 +1,20 @@
+realism_gate:
+  acf:
+    daily_lag: 24
+    weekly_lag: 168
+    min_peak_daily: 0.30
+    min_peak_weekly: 0.25
+
+  distribution:
+    min_skewness: 1.5
+    min_kurtosis: 3.0
+
+  service_concentration:
+    top_n: 3
+    min_cost_share: 0.60
+
+  usage_cost_linearity:
+    min_r2: 0.75
+
+  storage_monotonicity:
+    allowed_decrease_pct: 0.005  # allowing only explicit cleanup events

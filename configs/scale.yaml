@@ -1,0 +1,14 @@
+tiny:
+  days: 14
+  providers: 2
+  resources_per_provider: 6     # tests, local execution
+
+small:
+  days: 90
+  providers: 2
+  resources_per_provider: 15    # quick Colab sanity check
+
+full:
+  days: 365
+  providers: 2
+  resources_per_provider: 40    # ~0.7M rows hourly, full production benchmark

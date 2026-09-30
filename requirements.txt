@@ -1,0 +1,17 @@
+numpy
+pandas
+polars
+duckdb
+pyarrow
+scikit-learn
+lightgbm
+statsmodels
+ruptures
+scipy
+matplotlib
+plotly
+pandera
+pyyaml
+streamlit
+pytest
+ruff

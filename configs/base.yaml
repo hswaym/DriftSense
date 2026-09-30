@@ -1,0 +1,34 @@
+seed: 42
+timezone: "UTC"
+currency: "INR"
+
+date_range:
+  start: "2024-01-01 00:00:00"
+  end: "2024-12-31 23:00:00"
+
+paths:
+  data_raw: "data/raw"
+  data_clean: "data/clean"
+  data_gold: "data/gold"
+  artifacts: "artifacts"
+
+splits:
+  # Strict time-based splits (Full 365-day scale)
+  # Months 1-8: Train
+  # Months 9-10: Calibration (conformal calibration + threshold tuning)
+  # Months 11-12: Test (evaluation and incident detection)
+  train_end: "2024-08-31 23:00:00"
+  cal_end: "2024-10-31 23:00:00"
+  test_end: "2024-12-31 23:00:00"
+
+providers:
+  - "aws_like"
+  - "azure_like"
+
+services:
+  - "compute"
+  - "database"
+  - "object_storage"
+  - "warehouse"
+  - "cdn_egress"
+  - "kubernetes"
