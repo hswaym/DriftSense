@@ -8,6 +8,8 @@ from driftsense.sim.infra import generate_infra_telemetry
 from driftsense.sim.world import generate_world_timeline
 from driftsense.utils.io import load_config
 
+pytestmark = pytest.mark.p1
+
 
 @pytest.fixture
 def scale_cfg():

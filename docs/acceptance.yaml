@@ -1,0 +1,52 @@
+global_required: [pytest_all_green]
+suspicious_rules:
+  - id: S1   # too-perfect detection
+    when: "key_metrics.event_recall == 1.0 and key_metrics.fp_per_series_day == 0"
+  - id: S2   # coverage exactly at target suggests calibration and test overlap
+    when: "key_metrics.coverage_overall == 0.9"
+  - id: S3   # implausibly high attribution
+    when: "key_metrics.top1_counterfactual > 0.95"
+  - id: S4   # cleaning scored against itself
+    when: "all key_metrics.recovery_rate_* == 1.0"
+phases:
+  p0:
+    checks: [imports_ok, versions_printed, no_pretrained_scan_clean, splits_boundaries_ok, bridge_selftest_ok]
+  p1:
+    checks: [seed_reproducible, acf_24h_peak, acf_168h_peak, storage_monotone, no_nan,
+             cost_identity, cost_ordering, column_set_exact, autoscaler_bounds_ok]
+  p2:
+    checks: [incident_counts_ok, deviation_3sigma_ok, decoys_present, heldout_absent_train_calib,
+             dirt_types_all_present, dirt_rates_in_tolerance, clean_truth_hash_stable,
+             magnitude_nonneg, confounded_cases_present]
+    metrics: {n_incidents_nondecoy: [30, 60], n_decoys: [6, 14]}
+  p3:
+    checks: [realism_acf_daily, realism_acf_weekly, realism_heavy_tail, realism_top3_share,
+             realism_usage_cost_corr, realism_storage_monotone, zero_incident_windows_lost,
+             credits_preserved, quarantine_nonempty, leakage_test_pass, silver_pandera_ok,
+             gold_pandera_ok, cleaning_idempotent]
+    metrics:
+      recovery_rate_duplicates: [0.90, 1.0]
+      recovery_rate_timezone_shift: [0.90, 1.0]
+      recovery_rate_unit_mix: [0.90, 1.0]
+      recovery_rate_restatement: [0.90, 1.0]
+      recovery_rate_currency_mix: [0.90, 1.0]
+      recovery_rate_column_rename: [0.90, 1.0]
+      recovery_rate_cpu_glitch: [0.90, 1.0]
+      recovery_rate_missing_short_gap: [0.90, 1.0]
+  p4:
+    checks: [forecasts_no_nan_complete_hours, no_calib_in_train, splits_disjoint_ordered, coverage_within_2pts]
+    soft_checks: [gbm_beats_snaive_mae]
+    metrics: {coverage_overall: [0.88, 0.92]}
+  p5:
+    checks: [thresholds_calib_only, all_detectors_reported, decoy_fp_reported, heldout_row_present,
+             event_matching_unit_tests]
+  p6:
+    checks: [pvm_sums_ok, controls_exclude_alarmed, rule_table_complete, overspend_nonneg,
+             confounded_reported, low_confidence_flag_present, ground_truth_not_read_in_attribution]
+    metrics: {top1_counterfactual: [0.0, 1.0], top1_correlation: [0.0, 1.0], effect_mape: [0.0, 5.0]}
+  p7:
+    checks: [narrator_number_provenance, summary_from_csv_only, seeds_differ, tables_labeled_synthetic]
+  p8:
+    checks: [demo_5_scenarios_render, demo_files_complete, demo_reads_exports_only]
+  p9:
+    checks: [all_phase_reports_present, summaries_match_expected]

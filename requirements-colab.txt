@@ -1,0 +1,10 @@
+polars
+duckdb
+pyarrow
+lightgbm
+ruptures
+pandera[polars]
+pyyaml
+plotly
+pytest
+nbformat

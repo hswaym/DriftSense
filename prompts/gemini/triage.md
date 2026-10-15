@@ -1,0 +1,1 @@
+The notebook crashed. Read runs/<scale>/<phase>/error.txt and the tail of stdout.log. Find the failing line in src/ or notebooks/src/. Explain the cause in two sentences. If it is environment (missing package, Colab version), fix requirements-colab.txt or add a guard. If it is a code bug, follow prompts/gemini/fix.md. Never catch-and-ignore exceptions to hide a failure.

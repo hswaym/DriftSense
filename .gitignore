@@ -1,6 +1,7 @@
 # Data and Artifacts (Never commit large data or trained artifacts)
 data/
 artifacts/
+runs/
 
 # Python & Environments
 __pycache__/

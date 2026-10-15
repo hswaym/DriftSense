@@ -16,6 +16,8 @@ from driftsense.sim.pricing import (
 from driftsense.sim.world import generate_world_timeline
 from driftsense.utils.io import load_config
 
+pytestmark = pytest.mark.p1
+
 
 @pytest.fixture
 def sample_infra():

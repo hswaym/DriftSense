@@ -12,6 +12,8 @@ from driftsense.sim.pricing import apply_pricing_model
 from driftsense.sim.world import generate_world_timeline
 from driftsense.utils.io import load_config
 
+pytestmark = pytest.mark.p2
+
 
 @pytest.fixture
 def baseline_simulation():

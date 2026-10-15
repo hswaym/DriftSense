@@ -3,6 +3,8 @@
 from pathlib import Path
 import pytest
 
+pytestmark = pytest.mark.p0
+
 FORBIDDEN_PATTERNS = [
     "from_pretrained",
     "transformers",

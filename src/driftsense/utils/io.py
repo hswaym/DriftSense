@@ -19,6 +19,24 @@ def get_project_root() -> Path:
     return Path.cwd()
 
 
+def get_artifact_root() -> Path:
+    """Resolve the artifact root directory.
+
+    Order of precedence:
+    1. Environment variable DRIFTSENSE_ARTIFACT_ROOT (e.g. on Google Colab: /content/drive/MyDrive/driftsense/artifacts)
+    2. Local fallback: <project_root>/artifacts
+    """
+    env_root = os.environ.get("DRIFTSENSE_ARTIFACT_ROOT")
+    if env_root:
+        return Path(env_root).resolve()
+    return (get_project_root() / "artifacts").resolve()
+
+
+def get_artifact_path(scale: str, stage: str, filename: str) -> Path:
+    """Resolve full path to an artifact file under <artifact_root>/<scale>/<stage>/<filename>."""
+    return get_artifact_root() / scale / stage / filename
+
+
 def load_config(config_name: str = "base.yaml", config_dir: str = "configs") -> Dict[str, Any]:
     """Load a YAML configuration file from the configs directory.
 

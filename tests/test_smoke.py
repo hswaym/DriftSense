@@ -1,9 +1,13 @@
 """Smoke test for repository scaffold, configurations, and core utilities."""
 
+import pytest
+
 import driftsense
 from driftsense.utils.io import load_config
 from driftsense.utils.seed import set_seed
 from driftsense.utils.summary import format_result_summary
+
+pytestmark = pytest.mark.p0
 
 
 def test_package_import():
